@@ -1,0 +1,16 @@
+export const LANDING_URL = "/landing-page";
+export const LOGIN_URL = "/login";
+export const SIGNUP_URL = "/";
+export const CHAT_URL = "/chat";
+export const CHAT_HISTORY_URL = "/chat/:chatId";
+export const DASHBOARD_URL = "/dashboard";
+export const FORGOT_PASSWORD_URL = "/forgot-password";
+export const CHECK_EMAIL_URL = "/check-email";
+export const RESET_PASSWORD_URL = "/reset-password";
+export const VERIFY_EMAIL_URL = "/verify-email";
+export const CONNECT_SOCIAL_URL = "/social-connect";
+export const PROFILE_PAGE_URL = "/profile"
+export const REPORTS_PAGE_URL = "/reports"
+export const NOTIFICATIONS_PAGE_URL = "/notifications"
+export const SETTINGS_PAGE_URL = "/settings"
+export const HELP_PAGE_URL = "/help"

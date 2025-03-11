@@ -1,0 +1,43 @@
+/* Loader.css */
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1301;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.loader-small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.loader {
+  border: 4px solid transparent;
+  border-top: 4px solid #fff;  
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite; /* Continuous spinning animation */
+}
+
+/* Define the spinning animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); /* Start from 0 degree */
+  }
+  100% {
+    transform: rotate(360deg); /* Rotate to 360 degrees */
+  }
+}

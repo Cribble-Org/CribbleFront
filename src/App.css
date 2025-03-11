@@ -1,0 +1,145 @@
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 26px;
+  width: 26px;
+  border: 1.63px solid #0e0c15;
+  background: #15131d;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+.checkbox-container .checkmark:after {
+  left: 9px;
+  top: 6px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+  background-color: #000000d4 !important;
+  z-index: 111;
+}
+.checkbox-custom input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkbox-custom .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 26px;
+  width: 26px;
+  border: 1px solid #ada8c3;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.checkbox-custom .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.checkbox-custom input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-custom input:checked ~ .checkmark {
+  background-color: #655f7b;
+}
+.checkbox-custom .checkmark:after {
+  left: 9px;
+  top: 4px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.error-border {
+  border: 1px solid rgb(239 68 68 / var(--tw-text-opacity, 1)) !important
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.disableConnectBtn:disabled {
+  background-color: #d3d3d3; 
+  border: 1px solid #ccc; 
+  cursor: default; 
+  opacity: 0.6; 
+}
+
+.react-tel-input .flag-dropdown.open .selected-flag {
+  background-color: transparent !important;
+}
+
+.react-tel-input .selected-flag  {
+  background-color: transparent !important;
+}
+
+.react-tel-input .selected-flag:hover  {
+  background-color: transparent !important;
+}
+
+.react-tel-input .country-list .country.highlight {
+  background-color: transparent !important;
+}
+
+.react-tel-input .country-list .country:hover {
+  color: #0e0c15;
+}
+
+input {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #858DFF;
+  caret-color: #858DFF; /* To Ensure the cursor is visible */
+}
+
+.react-tel-input :disabled {
+  cursor: default !important;
+}
+
+/* calender disabled css */
+.rdrDayDisabled {
+  color: #ff6666 !important; /* Change to your preferred color */
+  background: rgba(255, 102, 102, 0.1) !important; /* Light red background */
+  cursor: default !important;
+  opacity: 0.7 !important;
+}
