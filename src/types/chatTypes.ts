@@ -1,3 +1,5 @@
+import { AI_BOT_URL } from './../constants/constants';
+
 export interface Message {
   _id: string;
   messageId: string;
@@ -13,7 +15,7 @@ export interface ChatData {
   id: string;
   title: string;
   participants: number;
-  type: "channel" | "community";
+  type: "channel" | "community" | typeof AI_BOT_URL;
   isActive: boolean;
   messages: Message[];
   channelId: string;

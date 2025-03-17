@@ -1,19 +1,16 @@
-'use client'
-import logo from './../assets/Images/o bg.webp';
+import logo from "./../assets/Images/o bg.webp";
 
 import { Search, Settings, ChevronDown, ChevronRight, X, Pencil, ArrowRight } from 'lucide-react'
-import { RootState } from '../config/store';
-import { useSelector } from 'react-redux';
 import Avatar from './Avatar';
 import { useParams } from 'react-router-dom';
 import { useChatSidebar } from '../hooks/useChatSidebar';
+import { AI_BOT_URL } from "../constants/constants";
 
 interface ChatSidebarProps {
   onClose?: () => void
 }
 export default function ChatSidebar({ onClose }: ChatSidebarProps) {
-  const { expandedCommunities, expandedSections, toggleChat, toggleExpand, toggleSection } = useChatSidebar()
-  const { chatList, chatHistory } = useSelector((state: RootState) => state.chatData);
+  const { expandedCommunities, expandedSections, toggleChat, toggleExpand, toggleSection, handleBotClick, chatList, chatHistory } = useChatSidebar()
   const param = useParams()
 
   return (
@@ -66,9 +63,8 @@ export default function ChatSidebar({ onClose }: ChatSidebarProps) {
             <div className="space-y-1 mt-1">
               <div className="bg-[#15131D] rounded-lg">
                 <button
-                  className={`w-full flex items-center gap-3 px-1 py-2 bg-[#15131D] rounded-lg}`}
-                  onClick={() => toggleChat()}
-                >
+                  className={`w-full flex items-center gap-3 px-1 py-2 rounded-lg rounded-lg ${
+                    param.chatId === AI_BOT_URL  ? "bg-[#252134]" : "bg-[#15131D]" }`} onClick={handleBotClick} >
                   <div className="w-10 h-10 flex items-center justify-center rounded-full">
                     <img
                       src={logo}
@@ -81,7 +77,7 @@ export default function ChatSidebar({ onClose }: ChatSidebarProps) {
                 </button>
               </div>
               {chatHistory
-                .filter((chat) => chat.chatType !== "community")
+                .filter((chat) => chat.chatType === "normal")
                 .map((chat) => (
                   <div key={chat._id} className="bg-[#15131D] rounded-lg">
                     <button

@@ -8,7 +8,7 @@ import handleAppEvents from '../utility/toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../config/store';
 import { getChatChannelWithMessages, getChatHistory, initiateChat } from '../redux/chat/chatAPI';
-import { SuggestionQuestions } from '../constants/constants';
+import { AI_BOT_URL, SuggestionQuestions } from "../constants/constants";
 import { ChatType } from '../types/chatTypes';
 
 export default function ChatInterface() {
@@ -22,6 +22,7 @@ export default function ChatInterface() {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const typingIntervalRef = useRef<number | null>(null);
   const { userData } = useSelector((state: RootState) => state.userData);
+  const { chatHistory } = useSelector((state: RootState) => state.chatData);
 
   const dispatch = useDispatch<AppDispatch>()
   const param = useParams()
@@ -39,12 +40,39 @@ export default function ChatInterface() {
   useEffect(() => {
     if (!location?.state?.newChat) {
       if (param?.chatId) {
-        dispatch(getChatHistory({ sessionId: param.chatId })).then((response) => {
+        const chatId =
+          param?.chatId === AI_BOT_URL
+            ? chatHistory.filter((chat) => chat.chatType === AI_BOT_URL)[0]
+                ?.chatType
+            : param?.chatId;
+        dispatch(getChatHistory({ sessionId: chatId })).then((response) => {
           if (response.type === "getChatHistory/fulfilled" && response.payload?.success) {
             setChannelDetails(response.payload?.data[0])
             scrollToBottom()
             setChannelName(response.payload?.data[0]?.channelName || "Cribble")
-            setChatMessages(response.payload?.data[0]?.messages || [])
+            if (chatId === AI_BOT_URL) {
+              const aiBotChats = response.payload?.data
+                ?.filter(
+                  (chat: { chatType: string }) => chat.chatType === AI_BOT_URL
+                )
+                .flatMap(
+                  (chat: {
+                    messages: Array<{
+                      role: "user" | "assistant";
+                      content: string;
+                    }>;
+                  }) => chat.messages
+                )
+                .sort(
+                  (a: { timestamp: string }, b: { timestamp: string }) =>
+                    new Date(a.timestamp).getTime() -
+                    new Date(b.timestamp).getTime()
+                );
+              setChatMessages(aiBotChats || []);
+            } else {
+              setChatMessages(response.payload?.data[0]?.messages || [])
+            }
+            
             return
           }
           resetChatsForNew()
@@ -96,27 +124,51 @@ export default function ChatInterface() {
     setMessage('');
 
     setLoading(true);
+    const chatId =
+      channelDetails?._id ??
+      (param?.chatId === AI_BOT_URL ? undefined : param?.chatId);
+
+    let chatType;
+
+    if (param.chatId === AI_BOT_URL) {
+      chatType = AI_BOT_URL;
+    } else if (isNewCommunityChat) {
+      chatType = "community";
+    } else if (chatMessages.length > 0) {
+      chatType = channelDetails?.chatType || "normal";
+    } else {
+      chatType = "normal";
+    }
 
     const params = {
-      chatId: channelDetails?._id ?? param?.chatId,
+      chatId,
       query: msg,
-      chatType: chatMessages.length > 0 ? undefined : (isNewCommunityChat ? "community" : "normal")
+      chatType: chatType,
     };
 
-    await dispatch(initiateChat(params)).then((response) => {
-      if (response.type === "initiateChat/fulfilled") {
-        navigate(`/chat/${response?.payload?.data?.chatId}`, { state: { newChat: response?.payload?.data?.newChannel } })
-        if (!channelDetails?._id) {
-          dispatch(getChatChannelWithMessages())
+    await dispatch(initiateChat(params))
+      .then((response) => {
+        if (response.type === "initiateChat/fulfilled") {
+          if (params?.chatType === AI_BOT_URL) {
+            navigate(`/chat/${AI_BOT_URL}`, {
+              state: { newChat: response?.payload?.data?.newChannel },
+            });
+          } else {
+            navigate(`/chat/${response?.payload?.data?.chatId}`, {
+              state: { newChat: response?.payload?.data?.newChannel },
+            });
+          }
+          if (!channelDetails?._id) {
+            dispatch(getChatChannelWithMessages())
+          }
+          responseText = response?.payload?.data?.aiResponse
+          animateTyping(responseText);
+          return
         }
-        responseText = response?.payload?.data?.aiResponse
-        animateTyping(responseText);
-        return
-      }
-      handleAppEvents(response.payload.error, "error")
-    }).finally(() => {
-      setLoading(false);
-    })
+        handleAppEvents(response.payload.error, "error")
+      }).finally(() => {
+        setLoading(false);
+      })
     setTypingMessage('');
   };
 
