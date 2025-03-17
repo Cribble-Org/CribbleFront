@@ -8,6 +8,7 @@ import { AppDispatch, RootState } from "../config/store";
 import { getActivenessAPI, getDashboardTableData } from "../redux/dashboard/dashboardAPI";
 import { setDateRange, setSelectedCommunities } from "../redux/dashboard/dashboardSlice";
 import Loader from "./Loader/Loader";
+import { adjustToLocalDate } from "../utility/adjustToLocalDate";
 
 export default function MessageStats() {
   const chartRef = useRef<HTMLDivElement>(null);
@@ -96,10 +97,13 @@ export default function MessageStats() {
 
   const handleReloadStats = () => {
     const { startDate, endDate } = dashboardDateRange[0] || {};
+    const formattedStartDate= startDate ? `${adjustToLocalDate(new Date(startDate))}` : undefined;
+    const formattedEndDate= endDate ? `${adjustToLocalDate(new Date(endDate))}` : undefined;
+
     const payload = {
       channelIds: selectedCommunities,
-      startDate: startDate,
-      endDate: endDate,
+      startDate: formattedStartDate,
+      endDate: formattedEndDate,
     };
 
     dispatch(getDashboardTableData(payload));

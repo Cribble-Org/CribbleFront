@@ -10,6 +10,7 @@ import { getSentimentsAverage } from "../lib/utils";
 import { getActivenessAPI, getDashboardTableData } from "../redux/dashboard/dashboardAPI";
 import { setDateRange, setSelectedCommunities } from "../redux/dashboard/dashboardSlice";
 import Loader from "./Loader/Loader";
+import { adjustToLocalDate } from "../utility/adjustToLocalDate";
 
 type TimeRange = "week" | "month" | "year" | "interval";
 
@@ -121,10 +122,13 @@ export default function SentimentChart({
 
   const handleReload = () => {
     const { startDate, endDate } = dashboardDateRange[0] || {};
+     const formattedStartDate= startDate ? `${adjustToLocalDate(new Date(startDate))}` : undefined;
+     const formattedEndDate= endDate ? `${adjustToLocalDate(new Date(endDate))}` : undefined;
+    
     const payload = {
       channelIds: selectedCommunities,
-      startDate: startDate,
-      endDate: endDate,
+      startDate: formattedStartDate,
+      endDate: formattedEndDate,
     };
 
     dispatch(getDashboardTableData(payload))

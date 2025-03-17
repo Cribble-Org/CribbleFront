@@ -16,7 +16,7 @@ export const getDashboardTableData = createAsyncThunk(
   "getDashboardTableData",
   async (params: SentimentsAPIFilters | undefined, { rejectWithValue }) => {
     try {
-      if (!params) {
+      if (!params?.startDate && !params?.endDate) {
         const { sevenDaysEarlier, previousDate } = getDefaultDates();
 
         params = {

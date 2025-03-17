@@ -17,6 +17,7 @@ import { getActivenessAPI, getDashboardTableData, getDBChannels, saveChannelsAPI
 import { setChannelLoadingTable, setSelectedCommunities } from '../redux/dashboard/dashboardSlice'
 import handleAppEvents from '../utility/toast'
 import ActiveChannelModal from './ActiveChannelModal'
+import { adjustToLocalDate } from '../utility/adjustToLocalDate'
 
 export default function CommunitiesDashboard() {
   const [communities, setCommunities] = useState<ChannelsList[]>([])
@@ -119,8 +120,8 @@ export default function CommunitiesDashboard() {
 
   const getSentimentsActiveness = (ids?: string[]) => {
     const { startDate, endDate } = dashboardDateRange[0] || {};
-    const formattedStartDate = startDate ? new Date(startDate).toLocaleDateString() : undefined;
-    const formattedEndDate = endDate ? new Date(endDate).toLocaleDateString() : undefined;
+    const formattedStartDate = startDate ? `${adjustToLocalDate(new Date(startDate))}` : undefined;
+    const formattedEndDate = endDate ? `${adjustToLocalDate(new Date(endDate))}` : undefined;
 
     const payload = {
       channelIds: ids ?? selectedCommunities,
