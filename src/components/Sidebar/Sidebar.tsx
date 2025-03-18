@@ -1,5 +1,3 @@
-'use client';
-
 import * as React from "react";
 import {
   Bell,
@@ -12,6 +10,7 @@ import {
   Box,
   ChevronLeft,
   ChevronRight,
+  BotIcon,
 } from 'lucide-react';
 import { cn } from "../../lib/utils";
 import logo from '../../assets/Images/o bg.webp';
@@ -111,7 +110,9 @@ export default function Sidebar() {
         <NavItem icon={MessageCircle} label="Chat" expanded={expanded}  to="/chat" />
         <NavItem icon={Bell} label="Notifications" expanded={expanded} to="/notifications" />
         <NavItem icon={CircleUser} label="Profile" expanded={expanded} to="/profile" />
-        <NavItem icon={Settings2} label="Settings" expanded={expanded} to="/settings" />
+        <NavItem icon={BotIcon} label="AIBot" expanded={expanded} to="/bot-aggent" />
+        <NavItem  icon={Settings2} label="Settings" expanded={expanded} to="/settings"
+ />
       </div>
 
       {/* Bottom Navigation */}
@@ -136,7 +137,6 @@ export default function Sidebar() {
           )}
         </button>
       </div>
-    {/* </div> */}
     </div>
   );
 }

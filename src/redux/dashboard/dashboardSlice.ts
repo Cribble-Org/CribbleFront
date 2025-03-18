@@ -128,11 +128,15 @@ const dashboardSlice = createSlice({
               role: [],
             };
           })
-          .sort(
-            (prev, next) =>
-              (next.isActive ? 1 : next.favorite ? 1 : 0) -
-              (prev.isActive ? 1 : prev.favorite ? 1 : 0)
-          );
+          .sort((prev, next) => {
+            if (next.isActive && !prev.isActive) return 1;
+            if (prev.isActive && !next.isActive) return -1;
+
+            if (next.favorite && !prev.favorite) return 1;
+            if (prev.favorite && !next.favorite) return -1;
+
+            return 0;
+          });
 
         state.channelsList = {
           channel: response?.filter(

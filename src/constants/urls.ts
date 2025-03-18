@@ -14,3 +14,5 @@ export const REPORTS_PAGE_URL = "/reports"
 export const NOTIFICATIONS_PAGE_URL = "/notifications"
 export const SETTINGS_PAGE_URL = "/settings"
 export const HELP_PAGE_URL = "/help"
+export const BOT_PAGE_URL = "/bot-aggent";
+export const COMMUNITY_LIST_PAGE_URL = "/community-agent-list";
