@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { PieChart, Box, MessageCircle, Bell, CircleUser, Settings2, HelpCircle, LogOut, Menu, ChevronDown } from "lucide-react";
 import { DateRange, RangeKeyDict } from "react-date-range";

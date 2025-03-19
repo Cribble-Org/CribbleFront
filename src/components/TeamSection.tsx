@@ -30,8 +30,6 @@ const teamMembers = [
 
 // Team member data
 
-("use client");
-
 export default function TeamSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 

@@ -20,6 +20,7 @@ export const getDashboardTableData = createAsyncThunk(
         const { sevenDaysEarlier, previousDate } = getDefaultDates();
 
         params = {
+          channelIds: params?.channelIds,
           startDate: sevenDaysEarlier,
           endDate: previousDate,
         };

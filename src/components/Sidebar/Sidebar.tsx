@@ -110,7 +110,7 @@ export default function Sidebar() {
         <NavItem icon={MessageCircle} label="Chat" expanded={expanded}  to="/chat" />
         <NavItem icon={Bell} label="Notifications" expanded={expanded} to="/notifications" />
         <NavItem icon={CircleUser} label="Profile" expanded={expanded} to="/profile" />
-        <NavItem icon={BotIcon} label="AIBot" expanded={expanded} to="/bot-aggent" />
+        <NavItem icon={BotIcon} label="AIBot" expanded={expanded} to="/bot-agent" />
         <NavItem  icon={Settings2} label="Settings" expanded={expanded} to="/settings"
  />
       </div>
