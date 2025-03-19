@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CommunitBotModal from "./CommunityBotModal/CommunityBotModal";
+import CommunityBotModal from "./CommunityBotModal/CommunityBotModal";
 
 export default function CommunityAgent() {
   const [openCommunitiesModal, setOpenCommunitiesModal] = useState(false);
@@ -42,7 +42,7 @@ export default function CommunityAgent() {
 
       {/* <button onClick={showCommunityModal}>Open modal</button> */}
       {openCommunitiesModal && (
-        <CommunitBotModal
+        <CommunityBotModal
           closeModal={hideCommunityModal}
           modalIsOpen={openCommunitiesModal}
         />

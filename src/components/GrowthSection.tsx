@@ -1,5 +1,3 @@
-"use client";
-
 import { Line, Bar } from "react-chartjs-2";
 import {  Users, Activity, Timer } from 'lucide-react';
 import {

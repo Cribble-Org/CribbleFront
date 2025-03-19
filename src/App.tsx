@@ -40,7 +40,7 @@ import Notifications from "./pages/Notifications";
 import Settings from "./pages/Settings";
 import Help from "./pages/Help";
 import CheckEmailPage from "./pages/CheckEmailPage";
-import BotAggentPage from "./pages/BotAggentPage";
+import BotAgentPage from "./pages/BotAgentPage";
 import CommunityAgentListPage from "./pages/CommunityAgentListPage";
 
 const App: React.FC = () => {
@@ -177,7 +177,7 @@ const App: React.FC = () => {
                 path={BOT_PAGE_URL}
                 element={
                   <PrivateRoute>
-                    <BotAggentPage />
+                    <BotAgentPage />
                   </PrivateRoute>
                 }
               />

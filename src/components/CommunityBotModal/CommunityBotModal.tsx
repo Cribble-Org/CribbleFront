@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import { customStylesCommunityBotModal } from "../../constants/styles";
 
 // Define types for the props
 interface CommunityBotModalProps {
@@ -6,29 +7,12 @@ interface CommunityBotModalProps {
   closeModal: () => void;
 }
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    boxShadow: "2px 2px 15px 2px #AC6AFF1A",
-    border: "1px solid #ADA8C3",
-    background: "#0A080F",
-    borderRadius: "30px",
-    width: "877px",
-    padding: "40px 80px 70px 20px",
-  },
-};
-
-const CommunitBotModal : React.FC<CommunityBotModalProps> = ({ modalIsOpen, closeModal }) => {
+const CommunityBotModal : React.FC<CommunityBotModalProps> = ({ modalIsOpen, closeModal }) => {
   return (
     <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
-      style={customStyles}
+      style={customStylesCommunityBotModal}
       contentLabel="Example Modal"
     >
       {/* Modal content */}
@@ -68,4 +52,4 @@ const CommunitBotModal : React.FC<CommunityBotModalProps> = ({ modalIsOpen, clos
   );
 };
 
-export default CommunitBotModal;
+export default CommunityBotModal;
