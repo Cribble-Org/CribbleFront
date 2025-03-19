@@ -161,9 +161,13 @@ export default function CommunitiesDashboard() {
   };
 
   // Activate channels
-  const activateChannels = () => {
+  const activateChannels = async() => {
+    const channelId = openConfirmModal.ids[0];
+    if (!channelId) return;
+
     const activatedChannels = userData?.channels || [];
-    const updatedChannels = [...selectedCommunities, ...activatedChannels];
+    const newSelectedCommunities = [...selectedCommunities, channelId];
+    const updatedChannels = [...newSelectedCommunities, ...activatedChannels];
     dispatch(setChannelLoadingTable(true))
     setOpenConfirmModal({ open: false, active: false, ids: [] });
     updateChannels(updatedChannels, "Channels activated successfully!");
@@ -214,10 +218,10 @@ export default function CommunitiesDashboard() {
             </Button>} >
 
               <DropdownMenuItem onClick={() => getSentimentsActiveness()}>Add to Dashboard</DropdownMenuItem>
-              <DropdownMenuItem onClick={() =>
+              {/* <DropdownMenuItem onClick={() =>
 
                 confirmUpdateChannel(true)
-              }>Active</DropdownMenuItem>
+              }>Active</DropdownMenuItem> */}
             </DropdownMenu>
             <DropdownMenu trigger={<Button variant="outline" className="bg-[#252134] border-gray-700">
               <Calendar size={20} />
@@ -279,11 +283,14 @@ export default function CommunitiesDashboard() {
                         <td className="py-4">{community.participants.toLocaleString()}</td>
                         <td className="py-4">
                           <Button
-                            disabled={community.status !== "Activated"}
+                            // disabled={community.status !== "Activated"}
                             variant="outline"
                             size="sm"
                             className={getStatusStyles(community.status)}
-                            onClick={() => community.status === "Activated" && confirmUpdateChannel(community.status !== "Activated", community.id)}
+                            onClick={() => {
+                              confirmUpdateChannel(community.status === "Deactivated", community.id);
+                            }}
+                            // onClick={() => community.status ? community.status === "Activated" && confirmUpdateChannel(community.status !== "Activated", community.id) : community.status === "Deactivated" && confirmUpdateChannel(true)}
                           >
                             {community.status}
                           </Button>
