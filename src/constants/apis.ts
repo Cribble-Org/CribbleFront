@@ -22,3 +22,7 @@ export const VERIFY_OTP_API_URL = "auth/verify-otp";
 export const RESET_PASSWORD_API_URL = "auth/reset-password";
 export const GET_USER_URL = "get-user";
 export const TELEGRAM_FAV_URL = "telegram/favorite-channel";
+
+// Bot Agent
+export const ADD_BOT_API_URL = "bots/add-bot";
+export const GET_BOTS_LIST_API = "bots";
