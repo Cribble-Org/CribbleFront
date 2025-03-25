@@ -14,3 +14,11 @@ interface UserData {
 export interface UserState {
   userData: UserData | null
 }
+
+interface BotAgent {
+  botName: string;
+}
+
+export interface BotAgentState {
+  botAgentListData: BotAgent[] | null
+}

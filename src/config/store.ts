@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { dashboardReducer } from '../redux/dashboard/dashboardSlice';
 import { userReducer } from '../redux/user/userSlice';
 import { chatReducer } from '../redux/chat/chatSlice';
+import { botAgentReducer } from '../redux/botAgent/botAgentSlice';
 
 const store = configureStore({
   reducer: {
     dashboardData: dashboardReducer,
     userData: userReducer,
-    chatData: chatReducer
+    chatData: chatReducer,
+    botData: botAgentReducer,
   },
 });
 

@@ -36,3 +36,8 @@ export const SignupSchema = Yup.object({
     .matches(/[a-zA-Z]/, 'Password must contain at least one letter.')
     .required("Password is required"),
 });
+
+export const BotSchema = Yup.object().shape({
+  botToken: Yup.string()
+    .required("Token is required"),
+});
