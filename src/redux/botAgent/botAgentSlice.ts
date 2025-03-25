@@ -1,10 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import { BotAgentState } from '../../types/userTypes';
-import { getBotListAPI } from './botAgentAPI';
+import { getBotDetailAPI, getBotListAPI } from './botAgentAPI';
 
 const initialState: BotAgentState = {
-  botAgentListData: []
+  botAgentListData: [],
+  botDetailData: null
 };
 
 export const revertAll = createAction('RESET_ALL');
@@ -19,7 +20,12 @@ const botAgentSlice = createSlice({
        if (action?.payload?.data) {
          state.botAgentListData = action.payload.data
        }
-     })
+     });
+     builder.addCase(getBotDetailAPI.fulfilled, (state, action) => {
+      if (action?.payload?.data) {
+        state.botDetailData = action.payload.data
+      }
+    })
    },
 });
 

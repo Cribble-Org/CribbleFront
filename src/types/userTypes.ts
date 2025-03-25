@@ -1,9 +1,9 @@
 interface UserData {
-  email : string,
-  firstName : string,
-  lastName : string,
-  id : string,
-  phone_number : string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  id: string,
+  phone_number: string,
   telegramConnected: string,
   channels: string[],
   favoriteChannels: string[],
@@ -17,8 +17,12 @@ export interface UserState {
 
 interface BotAgent {
   botName: string;
+  _id?: string;
 }
 
 export interface BotAgentState {
-  botAgentListData: BotAgent[] | null
+  botAgentListData: BotAgent[] | null;
+  botDetailData: {
+    botName: string
+  } | null
 }

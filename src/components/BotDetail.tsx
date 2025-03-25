@@ -1,23 +1,45 @@
 import { useEffect, useState } from "react";
 import CommunityBotModal from "./CommunityBotModal/CommunityBotModal";
 import BotImg from "../../src/assets/Images/bot-ellipse.png";
-import { getBotListAPI } from "../redux/botAgent/botAgentAPI";
+import { getBotDetailAPI } from "../redux/botAgent/botAgentAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../config/store";
-import { useNavigate } from "react-router-dom";
-import { BOT_DETAIL_PAGE_URL } from "../constants/urls";
+import { useNavigate, useParams } from "react-router-dom";
+import { COMMUNITY_DETAIL_PAGE_URL } from "../constants/urls";
 
-export default function CommunityAgent() {
+const botDetailAgentListData = [
+    {
+      id: "2",
+      botName: "Cribble Bot",
+    },
+    {
+      id: "2",
+      botName: "Cribble Bot",
+    },
+    {
+      id: "3",
+      botName: "Cribble Bot",
+    },
+    {
+      id: "4",
+      botName: "Cribble Bot",
+    },
+    {
+      id: "5",
+      botName: "Cribble Bot",
+    },
+  ];
+
+export default function BotDetail() {
   const [openCommunitiesModal, setOpenCommunitiesModal] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-  const botAgentListData = useSelector(
-    (state: RootState) => state.botData.botAgentListData ?? []
-  );
   const navigate = useNavigate();
+  const { bot_id } = useParams() as { bot_id: string };
+  const { botDetailData } = useSelector((state: RootState) => state.botData);
 
   useEffect(() => {
-    dispatch(getBotListAPI());
-  }, [dispatch]);
+    dispatch(getBotDetailAPI({ bot_id: bot_id }));
+  }, [dispatch, bot_id]);
 
   const showCommunityModal = () => {
     setOpenCommunitiesModal(true);
@@ -27,26 +49,34 @@ export default function CommunityAgent() {
     setOpenCommunitiesModal(false);
   };
 
-  const handleBotDetail = (bot_id:string)=>{
-    navigate(BOT_DETAIL_PAGE_URL.replace(":bot_id", bot_id));
-    }
+  const handleCommunityDetail = (bot_id: string, community_id: string) => {
+    navigate(
+      COMMUNITY_DETAIL_PAGE_URL.replace(":bot_id", bot_id).replace(
+        ":community_id",
+        community_id
+      )
+    );
+  };
 
   return (
     <div>
       <div className=" text-white flex flex-col bg-black lg:bg-transparent border-b-[#3F3A52] border-b-[1px] border-solid pb-4">
         <h1 className="text-xl font-semibold hidden lg:block px-4">
-          All Cribble Agnets
+          {`Cribble Agnets > ${botDetailData?.botName}`}
         </h1>
       </div>
 
       <div className="p-4">
         <div className="grid grid-cols-3 gap-4">
-          {botAgentListData && botAgentListData.length > 0 &&
-            botAgentListData?.map((botItem, index) => {
+          {botDetailAgentListData &&
+            botDetailAgentListData.length > 0 &&
+            botDetailAgentListData?.map((botItem, index) => {
               return (
                 <>
-                  <div key={index} className="rounded-2xl h-[400px] p-10 bg-[#15131D]"
-                  onClick={()=>handleBotDetail(botItem?._id as string)}
+                  <div
+                    key={index}
+                    className="rounded-2xl h-[400px] p-10 bg-[#15131D]"
+                    onClick={() => handleCommunityDetail(bot_id, botItem?.id)}
                   >
                     <div className="flex justify-between">
                       <div className="inline-block w-[calc(100%-100px)]">
@@ -146,14 +176,6 @@ export default function CommunityAgent() {
             <span className="text-[103px]">+</span>
             <p className="pt-10">Connect a Bot</p>
           </div>
-
-          {/* <div className="rounded-2xl h-[400px] px-24 bg-[#15131D] flex flex-col items-center justify-center"></div>
-
-          <div className="rounded-2xl h-[400px] px-24 bg-[#15131D] flex flex-col items-center justify-center"></div>
-
-          <div className="rounded-2xl h-[400px] px-24 bg-[#15131D] flex flex-col items-center justify-center"></div>
-          <div className="rounded-2xl h-[400px] px-24 bg-[#15131D] flex flex-col items-center justify-center"></div>
-          <div className="rounded-2xl h-[400px] px-24 bg-[#15131D] flex flex-col items-center justify-center"></div> */}
         </div>
       </div>
 

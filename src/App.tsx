@@ -29,6 +29,8 @@ import {
   CHECK_EMAIL_URL,
   BOT_PAGE_URL,
   COMMUNITY_LIST_PAGE_URL,
+  BOT_DETAIL_PAGE_URL,
+  COMMUNITY_DETAIL_PAGE_URL,
 } from "./constants/urls";
 import PublicRoute from "./routes/PublicRoutes";
 import PrivateRoute from "./routes/PrivateRoutes";
@@ -42,6 +44,8 @@ import Help from "./pages/Help";
 import CheckEmailPage from "./pages/CheckEmailPage";
 import BotAgentPage from "./pages/BotAgentPage";
 import CommunityAgentListPage from "./pages/CommunityAgentListPage";
+import BotDetailPage from "./pages/BotDetailPage";
+import CommunityDetailPage from "./pages/CommunityDetailPage";
 
 const App: React.FC = () => {
   return (
@@ -186,6 +190,22 @@ const App: React.FC = () => {
                 element={
                   <PrivateRoute>
                     <CommunityAgentListPage />
+                  </PrivateRoute>
+                }
+              />
+               <Route
+                path={BOT_DETAIL_PAGE_URL}
+                element={
+                  <PrivateRoute>
+                    <BotDetailPage />
+                  </PrivateRoute>
+                }
+              />
+               <Route
+                path={COMMUNITY_DETAIL_PAGE_URL}
+                element={
+                  <PrivateRoute>
+                    <CommunityDetailPage />
                   </PrivateRoute>
                 }
               />
