@@ -23,7 +23,7 @@ const CommunityBotModal: React.FC<CommunityBotModalProps> = ({
   modalIsOpen,
   closeModal,
 }) => {
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useDispatch<AppDispatch>();
   const [submitting, setSubmitting] = useState<boolean>(false);
 
   const initialValues: BotFormValues = {
@@ -32,17 +32,19 @@ const CommunityBotModal: React.FC<CommunityBotModalProps> = ({
 
   const botHandleSubmit = async (values: BotFormValues) => {
     setSubmitting(true);
-   await dispatch(addBotAPI({ botToken: values.botToken })).then(async (res) => {
-      setSubmitting(false);
-      closeModal();
-      if (res?.payload?.message) {
-        handleAppEvents(res?.payload?.message, "success")
-         dispatch(getBotListAPI());
-      } else {
-        handleAppEvents(res?.payload?.message, "error")
+    await dispatch(addBotAPI({ botToken: values.botToken })).then(
+      async (res) => {
+        setSubmitting(false);
         closeModal();
+        if (res?.payload?.message) {
+          handleAppEvents(res?.payload?.message, "success");
+          dispatch(getBotListAPI());
+        } else {
+          handleAppEvents(res?.payload?.message, "error");
+          closeModal();
+        }
       }
-    })
+    );
   };
 
   return (
@@ -51,6 +53,7 @@ const CommunityBotModal: React.FC<CommunityBotModalProps> = ({
       onRequestClose={closeModal}
       style={customStylesCommunityBotModal}
       contentLabel="Example Modal"
+      appElement={document.getElementById("root") || undefined}
     >
       {/* Modal content */}
       {/* {addingChannelsLoading && <Loader />} */}

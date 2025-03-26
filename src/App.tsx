@@ -3,14 +3,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import "./App.css";
-import DashboardPage from "./pages/DashBoardPage";
-import ChatPage from "./pages/ChatPage";
-import LoginPage from "./pages/Login";
-import SignupPage from "./pages/Signup";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
-import EnterCodePage from "./pages/EnterCodePage";
-import ConnectSocialPage from "./pages/ConnectSocialPage";
 import {
   CHAT_URL,
   CONNECT_SOCIAL_URL,
@@ -29,11 +21,21 @@ import {
   CHECK_EMAIL_URL,
   BOT_PAGE_URL,
   COMMUNITY_LIST_PAGE_URL,
+  BOT_DETAIL_PAGE_URL,
+  COMMUNITY_DETAIL_PAGE_URL,
 } from "./constants/urls";
 import PublicRoute from "./routes/PublicRoutes";
 import PrivateRoute from "./routes/PrivateRoutes";
 import store from "./config/store";
 import Toast from "./components/Toast/Toast";
+import DashboardPage from "./pages/DashBoardPage";
+import ChatPage from "./pages/ChatPage";
+import LoginPage from "./pages/Login";
+import SignupPage from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import EnterCodePage from "./pages/EnterCodePage";
+import ConnectSocialPage from "./pages/ConnectSocialPage";
 import ProfilePage from "./pages/ProfilePage";
 import Reports from "./pages/Reports";
 import Notifications from "./pages/Notifications";
@@ -42,6 +44,8 @@ import Help from "./pages/Help";
 import CheckEmailPage from "./pages/CheckEmailPage";
 import BotAgentPage from "./pages/BotAgentPage";
 import CommunityAgentListPage from "./pages/CommunityAgentListPage";
+import BotDetailPage from "./pages/BotDetailPage";
+import CommunityDetailPage from "./pages/CommunityDetailPage";
 
 const App: React.FC = () => {
   return (
@@ -186,6 +190,22 @@ const App: React.FC = () => {
                 element={
                   <PrivateRoute>
                     <CommunityAgentListPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path={BOT_DETAIL_PAGE_URL}
+                element={
+                  <PrivateRoute>
+                    <BotDetailPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path={COMMUNITY_DETAIL_PAGE_URL}
+                element={
+                  <PrivateRoute>
+                    <CommunityDetailPage />
                   </PrivateRoute>
                 }
               />

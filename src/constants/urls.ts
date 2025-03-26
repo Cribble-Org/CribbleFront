@@ -16,3 +16,5 @@ export const SETTINGS_PAGE_URL = "/settings"
 export const HELP_PAGE_URL = "/help"
 export const BOT_PAGE_URL = "/bot-agent";
 export const COMMUNITY_LIST_PAGE_URL = "/community-agent-list";
+export const BOT_DETAIL_PAGE_URL = "/bot-agent/:botId";
+export const COMMUNITY_DETAIL_PAGE_URL = "/bot-agent/:botId/:communityId";
