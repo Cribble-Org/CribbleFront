@@ -1,45 +1,44 @@
 import { useEffect, useState } from "react";
-import CommunityBotModal from "./CommunityBotModal/CommunityBotModal";
-import BotImg from "../../src/assets/Images/bot-ellipse.png";
-import { getBotDetailAPI } from "../redux/botAgent/botAgentAPI";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../config/store";
 import { useNavigate, useParams } from "react-router-dom";
-import { COMMUNITY_DETAIL_PAGE_URL } from "../constants/urls";
+import { useDispatch, useSelector } from "react-redux";
+import { getBotDetailAPI } from "../redux/botAgent/botAgentAPI";
+import { AppDispatch, RootState } from "../config/store";
+import CommunityBotModal from "./CommunityBotModal/CommunityBotModal";
+import BotDetailsCard from "./BotDetailsCard/BotDetailsCard";
 
 const botDetailAgentListData = [
-    {
-      id: "2",
-      botName: "Cribble Bot",
-    },
-    {
-      id: "2",
-      botName: "Cribble Bot",
-    },
-    {
-      id: "3",
-      botName: "Cribble Bot",
-    },
-    {
-      id: "4",
-      botName: "Cribble Bot",
-    },
-    {
-      id: "5",
-      botName: "Cribble Bot",
-    },
-  ];
+  {
+    id: "2",
+    botName: "Cribble Bot",
+  },
+  {
+    id: "2",
+    botName: "Cribble Bot",
+  },
+  {
+    id: "3",
+    botName: "Cribble Bot",
+  },
+  {
+    id: "4",
+    botName: "Cribble Bot",
+  },
+  {
+    id: "5",
+    botName: "Cribble Bot",
+  },
+];
 
 export default function BotDetail() {
   const [openCommunitiesModal, setOpenCommunitiesModal] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { bot_id } = useParams() as { bot_id: string };
+  const { botId } = useParams() as { botId: string };
   const { botDetailData } = useSelector((state: RootState) => state.botData);
 
   useEffect(() => {
-    dispatch(getBotDetailAPI({ bot_id: bot_id }));
-  }, [dispatch, bot_id]);
+    dispatch(getBotDetailAPI({ botId: botId }));
+  }, [dispatch, botId]);
 
   const showCommunityModal = () => {
     setOpenCommunitiesModal(true);
@@ -49,13 +48,8 @@ export default function BotDetail() {
     setOpenCommunitiesModal(false);
   };
 
-  const handleCommunityDetail = (bot_id: string, community_id: string) => {
-    navigate(
-      COMMUNITY_DETAIL_PAGE_URL.replace(":bot_id", bot_id).replace(
-        ":community_id",
-        community_id
-      )
-    );
+  const handleCommunityDetail = (botId: string, communityId: string) => {
+    navigate(`/bot-agent/${botId}/${communityId}`);
   };
 
   return (
@@ -65,116 +59,30 @@ export default function BotDetail() {
           {`Cribble Agnets > ${botDetailData?.botName}`}
         </h1>
       </div>
+      <div className="flex">
+        <div className="p-4">
+          <div className="grid grid-cols-3 gap-4">
+            {botDetailAgentListData &&
+              botDetailAgentListData.length > 0 &&
+              botDetailAgentListData?.map((botItem, index) => {
+                return (
+                  <>
+                    <BotDetailsCard
+                      botItem={botItem}
+                      index={index}
+                      handleCommunityDetail={handleCommunityDetail}
+                    />
+                  </>
+                );
+              })}
 
-      <div className="p-4">
-        <div className="grid grid-cols-3 gap-4">
-          {botDetailAgentListData &&
-            botDetailAgentListData.length > 0 &&
-            botDetailAgentListData?.map((botItem, index) => {
-              return (
-                <>
-                  <div
-                    key={index}
-                    className="rounded-2xl h-[400px] p-10 bg-[#15131D]"
-                    onClick={() => handleCommunityDetail(bot_id, botItem?.id)}
-                  >
-                    <div className="flex justify-between">
-                      <div className="inline-block w-[calc(100%-100px)]">
-                        <h3 className="font-sora text-2xl font-semibold mb-2">
-                          {botItem?.botName}
-                        </h3>
-                        <p
-                          className="font-sora font-extralight text-sm line-clamp-2
-"
-                        >
-                          Description : Lorem ipsum doler mites lorem ipsum
-                          Lorem ipsum doler mites lorem ipsum Lorem ipsum doler
-                          mites lorem ipsum Lorem ipsum doler mites lorem ipsum
-                        </p>
-                      </div>
-                      <div className="inline-block">
-                        <img src={BotImg} alt="" />
-                      </div>
-                    </div>
-                    <div className="py-4">
-                      <div className="flex mb-4 items-center">
-                        <div className="w-2/3">
-                          <h6 className="font-sora font-light text-base text-white">
-                            Status :{" "}
-                          </h6>
-                        </div>
-                        <div className="w-1/3">
-                          <p className="font-sora font-light text-base text-white">
-                            Connected{" "}
-                            <span className="bg-[#B3FF53] h-[8px] w-[8px] rounded-full inline-block"></span>
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex mb-4 items-center">
-                        <div className="w-2/3">
-                          <h6 className="font-sora font-light text-base text-white">
-                            Switch :
-                          </h6>
-                        </div>
-                        <div className="w-1/3">
-                          <p className="font-sora font-light text-base text-white">
-                            On/Off
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex mb-4 items-center">
-                        <div className="w-2/3">
-                          <h6 className="font-sora font-light text-base text-white">
-                            Version :
-                          </h6>
-                        </div>
-                        <div className="w-1/3">
-                          <p className="font-sora font-light text-base text-white">
-                            V.1.29.02
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex mb-4 items-center">
-                        <div className="w-2/3">
-                          <h6 className="font-sora font-light text-base text-white">
-                            Active <br /> Communities :
-                          </h6>
-                        </div>
-                        <div className="w-1/3">
-                          <p className="font-sora font-light text-base text-white">
-                            10
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex mb-4 items-center">
-                        <div className="w-2/3">
-                          <h6 className="font-sora font-light text-base text-white">
-                            Active Announcement <br />
-                            Groups :
-                          </h6>
-                        </div>
-                        <div className="w-1/3">
-                          <p className="font-sora font-light text-base text-white">
-                            06
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              );
-            })}
-
-          <div
-            className="rounded-2xl h-[400px] px-24 bg-[#15131D] flex flex-col items-center justify-center cursor-pointer"
-            onClick={showCommunityModal}
-          >
-            <span className="text-[103px]">+</span>
-            <p className="pt-10">Connect a Bot</p>
+            <div
+              className="rounded-2xl h-[400px] px-24 bg-[#15131D] flex flex-col items-center justify-center cursor-pointer"
+              onClick={showCommunityModal}
+            >
+              <span className="text-[103px]">+</span>
+              <p className="pt-10">Connect a Bot</p>
+            </div>
           </div>
         </div>
       </div>

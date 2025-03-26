@@ -44,9 +44,9 @@ export const getBotListAPI = createAsyncThunk(
 
 export const getBotDetailAPI = createAsyncThunk(
   'getBotDetailAPI',
-  async (params: { bot_id: string}, { rejectWithValue }) => {
+  async (params: { botId: string}, { rejectWithValue }) => {
     try {      
-      const { data } = await Axios.get(`${GET_BOTS_LIST_API}/${params.bot_id}`)
+      const { data } = await Axios.get(`${GET_BOTS_LIST_API}/${params.botId}`)
       return data;
     }
     catch (error) {

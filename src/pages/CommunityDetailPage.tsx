@@ -2,6 +2,7 @@ import { useState } from "react";
 import MobileNav from "../components/Header/NavMenu";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CommunityDetail from "../components/CommunityDetail";
+
 export default function CommunityDetailPage() {
   const [currentInterval, setCurrentInterval] = useState(0);
   const [isIntervalSelected, setIsIntervalSelected] = useState(false);

@@ -15,18 +15,18 @@ const botAgentSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-     builder.addCase(revertAll, () => initialState);
-     builder.addCase(getBotListAPI.fulfilled, (state, action) => {
-       if (action?.payload?.data) {
-         state.botAgentListData = action.payload.data
-       }
-     });
-     builder.addCase(getBotDetailAPI.fulfilled, (state, action) => {
+    builder.addCase(revertAll, () => initialState);
+    builder.addCase(getBotListAPI.fulfilled, (state, action) => {
+      if (action?.payload?.data) {
+        state.botAgentListData = action.payload.data
+      }
+    });
+    builder.addCase(getBotDetailAPI.fulfilled, (state, action) => {
       if (action?.payload?.data) {
         state.botDetailData = action.payload.data
       }
     })
-   },
+  },
 });
 
 export const botAgentReducer = botAgentSlice.reducer;

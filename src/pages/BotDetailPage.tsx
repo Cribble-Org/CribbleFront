@@ -2,6 +2,7 @@ import { useState } from "react";
 import MobileNav from "../components/Header/NavMenu";
 import Sidebar from "../components/Sidebar/Sidebar";
 import BotDetail from "../components/BotDetail";
+
 export default function BotDetailPage() {
   const [currentInterval, setCurrentInterval] = useState(0);
   const [isIntervalSelected, setIsIntervalSelected] = useState(false);
