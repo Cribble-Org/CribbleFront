@@ -24,5 +24,6 @@ export interface BotAgentState {
   botAgentListData: BotAgent[] | null;
   botDetailData: {
     botName: string
-  } | null
+  } | null;
+  channelAndCommunitiesList: []
 }

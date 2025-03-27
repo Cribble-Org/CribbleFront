@@ -1,43 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getBotDetailAPI } from "../redux/botAgent/botAgentAPI";
+import {
+  getBotChannelsAndCommunitiesAPI,
+  getBotDetailAPI,
+} from "../redux/botAgent/botAgentAPI";
 import { AppDispatch, RootState } from "../config/store";
+import { Button } from "./ui/button";
 import CommunityBotModal from "./CommunityBotModal/CommunityBotModal";
 import BotDetailsCard from "./BotDetailsCard/BotDetailsCard";
-
-const botDetailAgentListData = [
-  {
-    id: "2",
-    botName: "Cribble Bot",
-  },
-  {
-    id: "2",
-    botName: "Cribble Bot",
-  },
-  {
-    id: "3",
-    botName: "Cribble Bot",
-  },
-  {
-    id: "4",
-    botName: "Cribble Bot",
-  },
-  {
-    id: "5",
-    botName: "Cribble Bot",
-  },
-];
 
 export default function BotDetail() {
   const [openCommunitiesModal, setOpenCommunitiesModal] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { botId } = useParams() as { botId: string };
-  const { botDetailData } = useSelector((state: RootState) => state.botData);
+  const { botDetailData, channelAndCommunitiesList } = useSelector(
+    (state: RootState) => state.botData
+  );
 
   useEffect(() => {
     dispatch(getBotDetailAPI({ botId: botId }));
+    dispatch(
+      getBotChannelsAndCommunitiesAPI({ botId: botId, channels: "channels" })
+    );
   }, [dispatch, botId]);
 
   const showCommunityModal = () => {
@@ -55,16 +41,21 @@ export default function BotDetail() {
   return (
     <div>
       <div className=" text-white flex flex-col bg-black lg:bg-transparent border-b-[#3F3A52] border-b-[1px] border-solid pb-4">
-        <h1 className="text-xl font-semibold hidden lg:block px-4">
-          {`Cribble Agnets > ${botDetailData?.botName}`}
-        </h1>
+        <div className="flex justify-between">
+          <h1 className="text-xl font-semibold hidden lg:block px-4">
+            {`Cribble Agnets > ${botDetailData?.botName}`}
+          </h1>
+          <Button className="font-sora rounded-[15px] text-xxs bg-[#3F3A52] rounded-2xl w-[140px] h-[45px] p-[9px] mr-3">
+            Refresh
+          </Button>
+        </div>
       </div>
       <div className="flex">
         <div className="p-4">
           <div className="grid grid-cols-3 gap-4">
-            {botDetailAgentListData &&
-              botDetailAgentListData.length > 0 &&
-              botDetailAgentListData?.map((botItem, index) => {
+            {channelAndCommunitiesList &&
+              channelAndCommunitiesList.length > 0 &&
+              channelAndCommunitiesList?.map((botItem, index) => {
                 return (
                   <>
                     <BotDetailsCard
