@@ -16,4 +16,18 @@ export const SuggestionQuestions = [
 // API error message
 export const API_ERROR_MSG = "An unexpected error occurred."
 
-export const AI_BOT_URL = "aiBot" 
+export const AI_BOT_URL = "aiBot"
+
+export const BOT_CARD_DETAIL_LABELS = [
+  { label: "Agent Connection", key: "" },
+  { label: "Agent Connection", key: "" },
+  { label: "Agent Connection", key: "" },
+  { label: "Agent Connection", key: "" },
+];
+
+export const COMMUNITY_CARD_DETAIL_LABELS = [
+  { label: "Agent Connection", key: "" },
+  { label: "Agent Connection", key: "" },
+  { label: "Agent Connection", key: "" },
+  { label: "Agent Connection", key: "" },
+];

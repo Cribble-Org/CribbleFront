@@ -1,13 +1,18 @@
+import { Button } from "./ui/button";
 import MobileSubNavbar from "./MobileSubNavbar/MobileSubNavbar";
-import IphoneImage from "../assets/Images/Iphone-frame.png";
 
 export default function CommunityDetail() {
   return (
     <div>
       <div className=" text-white flex flex-col bg-black lg:bg-transparent border-b-[#3F3A52] border-b-[1px] border-solid pb-4">
-        <h1 className="text-xl font-semibold hidden lg:block px-4">
-          “XYZ” Community “botname” Cribble Agent
-        </h1>
+        <div className="flex justify-between">
+          <h1 className="text-xl font-semibold hidden lg:block px-4">
+            “XYZ” Community “botname” Cribble Agent
+          </h1>
+          <Button className="font-sora rounded-[15px] text-xxs bg-[#3F3A52] rounded-2xl w-[140px] h-[45px] p-[9px] mr-3">
+            Update
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-5 gap-4">
@@ -43,9 +48,12 @@ export default function CommunityDetail() {
               </div>
             </div>
 
-            <div className="border-l border-l-[#3B3B3B99] pl-[112px] py-[44px]">
+            <div className="border-l border-l-[#3B3B3B99] pl-[70px] py-[44px]">
               <div>
-                <img src={IphoneImage} />
+                <textarea
+                  className="font-montserrat font-normal text-sm w-[278px] rounded-[12px] bg-[#D9D9D9] text-black p-[17px] h-[391px] "
+                  placeholder="Type your greetings message here......."
+                ></textarea>
               </div>
             </div>
           </div>

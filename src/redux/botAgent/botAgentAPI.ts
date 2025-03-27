@@ -10,7 +10,7 @@ interface ApiError {
 
 export const addBotAPI = createAsyncThunk(
   'addBotAPI',
-  async (params: { botToken: string}, { rejectWithValue }) => {
+  async (params: { botToken: string }, { rejectWithValue }) => {
     try {
       const response = await Axios.post(ADD_BOT_API_URL, {
         ...params,
@@ -44,9 +44,25 @@ export const getBotListAPI = createAsyncThunk(
 
 export const getBotDetailAPI = createAsyncThunk(
   'getBotDetailAPI',
-  async (params: { botId: string}, { rejectWithValue }) => {
-    try {      
+  async (params: { botId: string }, { rejectWithValue }) => {
+    try {
       const { data } = await Axios.get(`${GET_BOTS_LIST_API}/${params.botId}`)
+      return data;
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return rejectWithValue(error.response.data as ApiError);
+      }
+      return rejectWithValue({ message: API_ERROR_MSG } as ApiError);
+    }
+  }
+);
+
+export const getBotChannelsAndCommunitiesAPI = createAsyncThunk(
+  'getBotChannelsAndCommunitiesAPI',
+  async (params: { botId: string, channels: string }, { rejectWithValue }) => {
+    try {
+      const { data } = await Axios.get(`${GET_BOTS_LIST_API}/${params.botId}/${params?.channels}`)
       return data;
     }
     catch (error) {
