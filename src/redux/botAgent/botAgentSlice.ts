@@ -6,7 +6,7 @@ import { getBotChannelsAndCommunitiesAPI, getBotDetailAPI, getBotListAPI } from 
 const initialState: BotAgentState = {
   botAgentListData: [],
   botDetailData: null,
-  channelAndCommunitiesList: []
+  channelAndCommunitiesList: null,
 };
 
 export const revertAll = createAction('RESET_ALL');

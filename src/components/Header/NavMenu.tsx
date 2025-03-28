@@ -1,5 +1,17 @@
 import { useState } from "react";
-import { PieChart, Box, MessageCircle, Bell, CircleUser, Settings2, HelpCircle, LogOut, Menu, ChevronDown } from "lucide-react";
+import {
+  PieChart,
+  Box,
+  MessageCircle,
+  Bell,
+  CircleUser,
+  Settings2,
+  HelpCircle,
+  LogOut,
+  Menu,
+  ChevronDown,
+  BotIcon,
+} from "lucide-react";
 import { DateRange, RangeKeyDict } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -58,7 +70,6 @@ interface MobileNavProps {
 export default function MobileNav({
   currentInterval,
   setCurrentInterval,
- 
   setIsIntervalSelected,
 }: MobileNavProps) {
   const [dateRange, setDateRange] = useState([
@@ -91,7 +102,9 @@ export default function MobileNav({
         <div className="relative h-10 w-10 sm:w-12 sm:h-12">
           <img src={logo} alt="Logo" className="rounded-full" />
         </div>
-        <span className="text-lg font-semibold text-white hidden sm:inline">CRIBBLE</span>
+        <span className="text-lg font-semibold text-white hidden sm:inline">
+          CRIBBLE
+        </span>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4">
@@ -141,6 +154,7 @@ export default function MobileNav({
             <NavItem icon={Settings2} label="Settings" to="/settings" />
             <DropdownMenuItem className="bg-gray-800 h-px m-1" />
             <NavItem icon={HelpCircle} label="Help" to="/help" />
+            <NavItem icon={BotIcon} label="AIBot" to="/bot-agent" />
             <NavItem icon={LogOut} label="Logout" onClick={() => {}} />
           </div>
         </DropdownMenu>
