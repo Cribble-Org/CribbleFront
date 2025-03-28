@@ -20,10 +20,18 @@ interface BotAgent {
   _id?: string;
 }
 
+interface CommunityAndChannel {
+  description?: string,
+  id?: string,
+  participantsCount?: string,
+  title?: string,
+  type?: string,
+}
+
 export interface BotAgentState {
   botAgentListData: BotAgent[] | null;
   botDetailData: {
     botName: string
   } | null;
-  channelAndCommunitiesList: []
+  channelAndCommunitiesList: CommunityAndChannel[] | null;
 }

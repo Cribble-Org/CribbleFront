@@ -8,6 +8,7 @@ import { addBotAPI, getBotListAPI } from "../../redux/botAgent/botAgentAPI";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../config/store";
 import handleAppEvents from "../../utility/toast";
+import Loader from "../Loader/Loader";
 
 // Define types for the props
 interface CommunityBotModalProps {
@@ -35,13 +36,12 @@ const CommunityBotModal: React.FC<CommunityBotModalProps> = ({
     await dispatch(addBotAPI({ botToken: values.botToken })).then(
       async (res) => {
         setSubmitting(false);
-        closeModal();
         if (res?.payload?.message) {
           handleAppEvents(res?.payload?.message, "success");
+          closeModal();
           dispatch(getBotListAPI());
         } else {
-          handleAppEvents(res?.payload?.message, "error");
-          closeModal();
+          handleAppEvents(res?.payload?.error, "error");
         }
       }
     );
@@ -56,7 +56,7 @@ const CommunityBotModal: React.FC<CommunityBotModalProps> = ({
       appElement={document.getElementById("root") || undefined}
     >
       {/* Modal content */}
-      {/* {addingChannelsLoading && <Loader />} */}
+      {submitting && <Loader />}
       <div className="pt-7 px-10 pb-5">
         <h1 className="font-sora text-white font-semibold text-[32px]">
           {" "}
@@ -99,7 +99,7 @@ const CommunityBotModal: React.FC<CommunityBotModalProps> = ({
                   type="submit"
                   className="w-[250px] bg-[#B3FF53] shadow-[0px 0px 20px 0px #00000005] h-[43px] rounded-[12px] text-[#000] Sora text-base font-semibold my-3"
                 >
-                  {submitting ? "Submit..." : "Submit"}
+                  Submit
                 </button>
               </div>
             </Form>

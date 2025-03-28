@@ -54,8 +54,8 @@ export default function BotDetail() {
         <div className="p-4">
           <div className="grid grid-cols-3 gap-4">
             {channelAndCommunitiesList &&
-              channelAndCommunitiesList.length > 0 &&
-              channelAndCommunitiesList?.map((botItem, index) => {
+              channelAndCommunitiesList?.length > 0 &&
+              channelAndCommunitiesList?.filter((botItem) => botItem.type === "group")?.map((botItem, index) => {
                 return (
                   <>
                     <BotDetailsCard
