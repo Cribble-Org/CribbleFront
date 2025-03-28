@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getBotListAPI } from "../redux/botAgent/botAgentAPI";
+import { addBotAPI, getBotListAPI } from "../redux/botAgent/botAgentAPI";
 import { AppDispatch, RootState } from "../config/store";
+import handleAppEvents from "../utility/toast";
+import { BotSchema } from "../utility/schemas";
+import { BOT_DETAIL_LABELS } from "../constants/constants";
+import { InitialBotModalValues } from "../types/botTypes";
 import BotDetailsCard from "./BotDetailsCard/BotDetailsCard";
 import CommunityBotModal from "./CommunityBotModal/CommunityBotModal";
 
@@ -13,6 +17,7 @@ export default function CommunityAgent() {
     (state: RootState) => state.botData.botAgentListData ?? []
   );
   const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(getBotListAPI());
@@ -28,6 +33,28 @@ export default function CommunityAgent() {
 
   const handleBotDetail = (botId: string) => {
     navigate(`/bot-agent/${botId}`);
+  };
+
+  const initialValues: InitialBotModalValues = {
+    token: "",
+  };
+
+  const botHandleSubmit = async (values: InitialBotModalValues) => {
+    setSubmitting(true);
+    try {
+      const res = await dispatch(addBotAPI({ botToken: values.token }));
+      setSubmitting(false);
+      if (res?.payload?.message) {
+        handleAppEvents(res.payload.message, "success");
+        hideCommunityModal();
+        dispatch(getBotListAPI());
+      } else {
+        handleAppEvents(res?.payload?.error, "error");
+      }
+    } catch (error) {
+      console.error("Error in botHandleSubmit:", error);
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -61,16 +88,19 @@ export default function CommunityAgent() {
             <span className="text-[103px]">+</span>
             <p className="pt-10">Connect a Bot</p>
           </div>
-
-          {/* <div className="rounded-2xl h-[400px] px-24 bg-[#15131D] flex flex-col items-center justify-center"></div> */}
         </div>
       </div>
 
-      {/* <button onClick={showCommunityModal}>Open modal</button> */}
       {openCommunitiesModal && (
         <CommunityBotModal
           closeModal={hideCommunityModal}
+          token={initialValues.token}
           modalIsOpen={openCommunitiesModal}
+          communtyDetailLabel={BOT_DETAIL_LABELS}
+          initialValues={initialValues}
+          validationSchema={BotSchema}
+          onSubmit={botHandleSubmit}
+          submitting={submitting}
         />
       )}
     </div>

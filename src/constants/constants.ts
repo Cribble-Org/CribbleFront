@@ -31,3 +31,19 @@ export const COMMUNITY_CARD_DETAIL_LABELS = [
   { label: "Agent Connection", key: "" },
   { label: "Agent Connection", key: "" },
 ];
+
+export const COMMUNITY_DETAIL_LABELS = {
+  title: "Add Community",
+  description: "",
+  fieldLabel: "Enter telegram community username below",
+  placeholder: "Enter @username",
+  submitButtonLabel: "Add",
+}
+
+export const BOT_DETAIL_LABELS = {
+  title: "Enter Telegram Bot Token",
+  description: `Data Protection Commitment: At Cribble, we analyze your messages solely for sentiment and KPI assessments, strictly within the scope of your provided permissions. We do not store, share, or retain any of your messages or personal data. Additionally, we never access any communities or groups beyond those you have authorized.`,
+  fieldLabel: "Get the token for your bot from BotFather and enter it below.",
+  placeholder: "Enter Bot Token",
+  submitButtonLabel: "Submit",
+};
