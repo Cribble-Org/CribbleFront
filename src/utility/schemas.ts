@@ -38,6 +38,11 @@ export const SignupSchema = Yup.object({
 });
 
 export const BotSchema = Yup.object().shape({
-  botToken: Yup.string()
+  token: Yup.string()
     .required("Token is required"),
-});
+}) as unknown as { token: "string" };;
+
+export const CommunitySchema = Yup.object().shape({
+  token: Yup.string()
+    .required("Token is required"),
+}) as unknown as { token: "string" };

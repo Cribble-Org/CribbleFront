@@ -26,3 +26,4 @@ export const TELEGRAM_FAV_URL = "telegram/favorite-channel";
 // Bot Agent
 export const ADD_BOT_API_URL = "bots/add-bot";
 export const GET_BOTS_LIST_API = "bots";
+export const ADD_COMMUNITY_API_URL = "community/add-community";

@@ -1,52 +1,19 @@
 import Modal from "react-modal";
-import { customStylesCommunityBotModal } from "../../constants/styles";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { BotSchema } from "../../utility/schemas";
+import { customStylesCommunityBotModal } from "../../constants/styles";
 import { cn } from "../../lib/utils";
-import { useState } from "react";
-import { addBotAPI, getBotListAPI } from "../../redux/botAgent/botAgentAPI";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../config/store";
-import handleAppEvents from "../../utility/toast";
 import Loader from "../Loader/Loader";
-
-// Define types for the props
-interface CommunityBotModalProps {
-  modalIsOpen: boolean;
-  closeModal: () => void;
-}
-
-interface BotFormValues {
-  botToken: string;
-}
+import { CommunityBotModalProps } from "../../types/botTypes";
 
 const CommunityBotModal: React.FC<CommunityBotModalProps> = ({
   modalIsOpen,
   closeModal,
+  initialValues,
+  validationSchema,
+  onSubmit,
+  submitting,
+  communtyDetailLabel,
 }) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const [submitting, setSubmitting] = useState<boolean>(false);
-
-  const initialValues: BotFormValues = {
-    botToken: "",
-  };
-
-  const botHandleSubmit = async (values: BotFormValues) => {
-    setSubmitting(true);
-    await dispatch(addBotAPI({ botToken: values.botToken })).then(
-      async (res) => {
-        setSubmitting(false);
-        if (res?.payload?.message) {
-          handleAppEvents(res?.payload?.message, "success");
-          closeModal();
-          dispatch(getBotListAPI());
-        } else {
-          handleAppEvents(res?.payload?.error, "error");
-        }
-      }
-    );
-  };
-
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -60,38 +27,34 @@ const CommunityBotModal: React.FC<CommunityBotModalProps> = ({
       <div className="pt-7 px-10 pb-5">
         <h1 className="font-sora text-white font-semibold text-[32px]">
           {" "}
-          Enter Telegram Bot Token
+          {communtyDetailLabel?.title}
         </h1>
         <p className="font-sora font-light text-base text-[#3B3B3B]">
-          Data Protection Commitment: At Cribble, we analyze your messages
-          solely for sentiment and KPI assessments, strictly within the scope of
-          your provided permissions. We do not store, share, or retain any of
-          your messages or personal data. Additionally, we never access any
-          communities or groups beyond those you have authorized.
+          {communtyDetailLabel?.description}
         </p>
 
         <Formik
           initialValues={initialValues}
-          validationSchema={BotSchema}
-          onSubmit={botHandleSubmit}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
         >
           {({ errors, touched }) => (
             <Form>
               <div className="py-8">
                 <label className="block Sora text-white text-base font-semibold mb-3">
-                  Get the token for your bot from botfather & Enter Below
+                  {communtyDetailLabel?.fieldLabel}
                 </label>
                 <Field
                   type="text"
-                  name="botToken"
-                  placeholder="Enter Bot Token"
+                  name="token"
+                  placeholder={communtyDetailLabel?.placeholder}
                   className={cn(
                     "border border-[#ADA8C3] bg-[#15131D] rounded-[12px] h-[70px] px-5 py-3 mb-4 w-full focus:outline-none focus:shadow-outline font-normal text-base bot-input",
-                    errors.botToken && touched.botToken ? "error-border" : ""
+                    errors.token && touched.token ? "error-border" : ""
                   )}
                 />
                 <ErrorMessage
-                  name="botToken"
+                  name="token"
                   component="div"
                   className="text-red-500 text-sm mb-5 ml-2"
                 />
@@ -99,7 +62,7 @@ const CommunityBotModal: React.FC<CommunityBotModalProps> = ({
                   type="submit"
                   className="w-[250px] bg-[#B3FF53] shadow-[0px 0px 20px 0px #00000005] h-[43px] rounded-[12px] text-[#000] Sora text-base font-semibold my-3"
                 >
-                  Submit
+                  {communtyDetailLabel?.submitButtonLabel}
                 </button>
               </div>
             </Form>

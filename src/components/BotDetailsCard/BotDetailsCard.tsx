@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import BotImg from "../../../src/assets/Images/bot-ellipse.png";
 
 interface Bot {
   id?: string;
@@ -10,6 +9,7 @@ interface Bot {
 interface BotDetailsCardProps {
   botItem?: Bot;
   index?: string | number;
+  icon?: string;
   handleCommunityDetail?: (
     botId: string,
     communityId: string
@@ -19,6 +19,7 @@ interface BotDetailsCardProps {
 export default function BotDetailsCard({
   botItem,
   index,
+  icon,
   handleCommunityDetail,
 }: BotDetailsCardProps) {
   const { botId } = useParams() as { botId: string };
@@ -43,7 +44,7 @@ export default function BotDetailsCard({
         <div className="flex justify-between">
           <div className="inline-block w-[calc(100%-100px)]">
             <h3 className="font-sora text-2xl font-semibold mb-2">
-              {botItem?.botName}
+              {botItem?.botName || 'Community Name'}
             </h3>
             <p
               className="font-sora font-extralight text-sm line-clamp-2
@@ -54,8 +55,8 @@ export default function BotDetailsCard({
               ipsum doler mites lorem ipsum
             </p>
           </div>
-          <div className="inline-block">
-            <img src={BotImg} alt="" />
+          <div className="inline-block h-[80px] w-[80px]">
+            <img src={icon} alt="" />
           </div>
         </div>
         <div className="py-4">
