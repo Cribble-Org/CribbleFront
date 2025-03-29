@@ -47,9 +47,9 @@ export default function BotDetail() {
   };
 
   const botHandleSubmit = async (values: InitialBotModalValues) => {
-    setSubmitting(true);
+    // setSubmitting(true);
     console.log(values);
-
+    hideCommunityModal();
     // try {
     //   const res = await dispatch(
     //     addCommunityAPI({ token: values.token })
