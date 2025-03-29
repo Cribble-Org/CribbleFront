@@ -9,6 +9,7 @@ import { BOT_DETAIL_LABELS } from "../constants/constants";
 import { InitialBotModalValues } from "../types/botTypes";
 import BotDetailsCard from "./BotDetailsCard/BotDetailsCard";
 import CommunityBotModal from "./CommunityBotModal/CommunityBotModal";
+import BotImg from "../../src/assets/Images/bot-ellipse.png";
 
 export default function CommunityAgent() {
   const [openCommunitiesModal, setOpenCommunitiesModal] = useState(false);
@@ -75,6 +76,7 @@ export default function CommunityAgent() {
                   <BotDetailsCard
                     botItem={botItem}
                     index={index}
+                    icon={BotImg}
                     handleCommunityDetail={handleBotDetail}
                   />
                 </>

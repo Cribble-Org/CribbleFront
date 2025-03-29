@@ -12,10 +12,12 @@ import { InitialBotModalValues } from "../types/botTypes";
 import { Button } from "./ui/button";
 import CommunityBotModal from "./CommunityBotModal/CommunityBotModal";
 import BotDetailsCard from "./BotDetailsCard/BotDetailsCard";
+import BotDetailIcon from "../../src/assets/Images/communityIcon.png";
+
 
 export default function BotDetail() {
   const [openCommunitiesModal, setOpenCommunitiesModal] = useState(false);
-  const [submitting, setSubmitting] = useState<boolean>(false);
+  // const [submitting, setSubmitting] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { botId } = useParams() as { botId: string };
@@ -49,7 +51,6 @@ export default function BotDetail() {
   const botHandleSubmit = async (values: InitialBotModalValues) => {
     // setSubmitting(true);
     console.log(values);
-    hideCommunityModal();
     // try {
     //   const res = await dispatch(
     //     addCommunityAPI({ token: values.token })
@@ -92,6 +93,7 @@ export default function BotDetail() {
                       <BotDetailsCard
                         botItem={botItem}
                         index={index}
+                        icon={BotDetailIcon}
                         handleCommunityDetail={handleCommunityDetail}
                       />
                     </>
@@ -119,7 +121,7 @@ export default function BotDetail() {
           initialValues={initialValues}
           validationSchema={CommunitySchema}
           onSubmit={botHandleSubmit}
-          submitting={submitting}
+          // submitting={submitting}
         />
       )}
     </div>

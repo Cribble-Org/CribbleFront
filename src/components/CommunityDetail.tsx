@@ -1,13 +1,19 @@
 import { Button } from "./ui/button";
+import { useSelector } from "react-redux";
+import { RootState } from "../config/store";
 import MobileSubNavbar from "./MobileSubNavbar/MobileSubNavbar";
 
 export default function CommunityDetail() {
+  const { botDetailData } = useSelector(
+    (state: RootState) => state.botData
+  );
+
   return (
     <div>
       <div className=" text-white flex flex-col bg-black lg:bg-transparent border-b-[#3F3A52] border-b-[1px] border-solid pb-4">
         <div className="flex justify-between">
           <h1 className="text-xl font-semibold hidden lg:block px-4">
-            “XYZ” Community “botname” Cribble Agent
+            {`${botDetailData?.botName} > Community Name > Greetings `}
           </h1>
           <Button className="font-sora rounded-[15px] text-xxs bg-[#3F3A52] rounded-2xl w-[140px] h-[45px] p-[9px] mr-3">
             Update
