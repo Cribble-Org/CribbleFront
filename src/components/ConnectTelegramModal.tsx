@@ -39,11 +39,11 @@ export default function ConnectTelegramModal({ isOpen, onClose, phoneNumber = ""
     event.preventDefault();
     setLoading(true);
 
-    dispatch(sendTelegramConnectCode({ phone_number: phoneValue })).then((response) => {
+    dispatch(sendTelegramConnectCode({ phoneNumber: phoneValue })).then((response) => {
       setLoading(false);
       if (response?.payload?.success) {
         handleAppEvents(response?.payload?.message, "success");
-        setPhoneCodeHash(response?.payload?.phone_code_hash);
+        setPhoneCodeHash(response?.payload?.phoneCodeHash);
         setCodeSent(true);
         return;
       }
@@ -55,10 +55,10 @@ export default function ConnectTelegramModal({ isOpen, onClose, phoneNumber = ""
     event.preventDefault();
     setLoading(true);
     const params = {
-      phone_number: phoneValue,
-      phone_code: otpValue,
-      phone_code_hash: phoneCodeHash,
-      twofa_password: password ? password : undefined
+      phoneNumber: phoneValue,
+      phoneCode: otpValue,
+      phoneCodeHash: phoneCodeHash,
+      twofaPassword: password ? password : undefined
     }
 
     dispatch(sendTelegramOtpSubmit(params)).then((response) => {

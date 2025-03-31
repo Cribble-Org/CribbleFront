@@ -152,10 +152,10 @@ const dashboardSlice = createSlice({
       if (action.payload?.data) {
         const response = action?.payload?.data;
         state.savedChannels = response.map(
-          (channel: ChannelsList & { _id: string }) => {
+          (channel: ChannelsList & { communityId: string }) => {
             return {
               ...channel,
-              id: channel._id,
+              id: channel.communityId,
               role: [],
               size: "",
               status: "Activate",

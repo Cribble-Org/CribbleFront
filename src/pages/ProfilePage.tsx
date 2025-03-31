@@ -105,7 +105,7 @@ function ProfilePage() {
                     {UserInfo("Full Name", `${userData?.firstName} ${userData?.lastName}`, ProfileImg)}
                     {UserInfo("Email Address", userData?.email || "-", EmailImg)}
                     {UserInfo("Address", "Coming soon", LocationImg)}
-                    {UserInfo("Phone Number", userData?.phone_number || "-", PhoneImg)}
+                    {UserInfo("Phone Number", userData?.phoneNumber || "-", PhoneImg)}
                   </div>
 
                   <div className="shadow-[0px 0px 30px 0px #0000000F] bg-[#15131D] rounded-3xl p-6">
@@ -183,7 +183,7 @@ function ProfilePage() {
           </div>
         </div >
       </main >
-      {modalIsOpen && <ConnectTelegramModal phoneNumber={userData?.phone_number} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} />}
+      {modalIsOpen && <ConnectTelegramModal phoneNumber={userData?.phoneNumber} isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)} />}
     </div >
   );
 }

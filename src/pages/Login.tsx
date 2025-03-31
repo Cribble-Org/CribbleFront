@@ -59,8 +59,8 @@ export default function LoginPage() {
 
         setIsLoading(false);
         setAccessToken(res?.payload?.token)
-        localStorage.setItem("hideDashboardModal", res?.payload?.isSavedChannels)
-        if (res?.payload?.telegramConnected) {
+        localStorage.setItem("hideDashboardModal", res?.payload?.isChannelSelected)
+        if (res?.payload?.communityConnected?.tg) {
           navigate(DASHBOARD_URL)
           return
         }
