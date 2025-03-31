@@ -1,7 +1,7 @@
 // Chats
-export const GET_CHANNEL_WITH_MESSAGE = "telegram/channels-with-messages"
+export const GET_CHANNEL_WITH_MESSAGE = "telegram/channels-with-messages";
 export const GET_CHAT_HISTORY = "chats/history";
-export const GET_ALL_CHATS= "chats";
+export const GET_ALL_CHATS = "chats";
 
 // Dashboard
 export const SENTIMENTS_URL = "telegram/sentiments";
@@ -10,6 +10,7 @@ export const GET_CHANNELS_URL = "telegram/get-channels";
 export const GET_DB_CHANNELS_URL = "telegram/channels";
 export const SAVE_CHANNELS_URL = "telegram/post-channels";
 export const GET_SAVE_CHANNELS_URL = "telegram/get-save-channels";
+export const GET_REFRESH_USER_DATA = "/telegram/refresh-user";
 
 // User
 export const LOGIN_API_URL = "auth/login";
