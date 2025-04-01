@@ -50,17 +50,17 @@ export default function LoginPage() {
   const handleSubmit = async (values: LoginFormValues) => {
     setIsLoading(true);
     dispatch(loginAPI({ email: values.email, password: values.password })).then(async (res) => {
-      if (res?.payload?.success) {
+      if (res?.payload?.status) {
         // Check for Email verify
-        if (!res?.payload?.isEmailVerified) {
+        if (!res?.payload?.data?.isEmailVerified) {
           await sendVerifyMail({ email: values.email })
           return;
         }
 
         setIsLoading(false);
-        setAccessToken(res?.payload?.token)
-        localStorage.setItem("hideDashboardModal", res?.payload?.isChannelSelected)
-        if (res?.payload?.communityConnected?.tg) {
+        setAccessToken(res?.payload?.data?.token)
+        localStorage.setItem("hideDashboardModal", res?.payload?.data?.isChannelSelected)
+        if (res?.payload?.data?.communityConnected?.tg) {
           navigate(DASHBOARD_URL)
           return
         }
